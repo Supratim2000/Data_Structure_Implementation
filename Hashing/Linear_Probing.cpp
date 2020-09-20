@@ -42,7 +42,6 @@ void Insert(int hash[],int key)
 
 int main()
 {
-    //TODO :- Need to create Search() function.
     int hash[size]={0};
     Insert(hash, 26);
     Insert(hash, 30);
