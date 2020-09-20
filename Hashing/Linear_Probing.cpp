@@ -7,11 +7,27 @@ int hashfn(int val)
     return val%size;
 }
 
-int Probe(int hash[],int key)
+int Search(int hash[],int val)
 {
     int i=0;
+    int index=hashfn(val);
+    if(hash[index]==val)
+        return index;
+    else
+    {
+        while(hash[(index+i)%10]!=0 && hash[(index+i)%10]!=val)
+            i++;
+        if (hash[(index+i)%10]==0)
+            return -1;
+        return (index+i)%10;
+    }
+}
+
+int Probe(int hash[],int key)
+{
     int index=hashfn(key);
-    while(hash[(index+i)%size]!=0)
+    int i=0;
+    while(hash[(index+i)%size])
         i++;
     return (index+i)%size;
 }
@@ -24,23 +40,10 @@ void Insert(int hash[],int key)
     hash[index]=key;
 }
 
-int Search(int hash[],int key)
-{
-    int index=hashfn(key);
-    int i=0;
-    if(hash[index]==0)
-        return -1;
-    while(hash[(index+i)%10]!=0 && hash[(index+i)%10]!=key)
-        i++;
-    if (hash[(index + i) % 10]==0)
-        return -1;
-    return (index + i) % 10;
-}
-
 int main()
 {
+    //TODO :- Need to create Search() function.
     int hash[size]={0};
-    
     Insert(hash, 26);
     Insert(hash, 30);
     Insert(hash, 45);
@@ -52,7 +55,13 @@ int main()
     Insert(hash, 29);
 
     for(int i=0;i<size;i++)
-        cout<<hash[i]<<endl;
+        cout<<hash[i]<<" ";
+    cout<<endl;
+
+    cout<<Search(hash, 23)<<" ";
+    cout<<Search(hash, 25)<<" ";
+    cout<<Search(hash, 39)<<" ";
+    cout<<endl;
 
     return 0;
 }
