@@ -41,9 +41,21 @@ void Insert(int hash[],int key)
     int R = NearestPrime(size);
     int index=hashfn(key);
     int i=0;
-    while (hash[(index + (i * (R - (key % R))))%10] != 0)
+    while (hash[(index + (i * (R - (key % R))))%size] != 0)
         i++;
-    hash[(index + (i * (R - (key % R))))%10] = key;
+    hash[(index + (i * (R - (key % R))))%size] = key;
+}
+
+int Search(int hash[],int key)
+{
+    int R = NearestPrime(size);
+    int index = hashfn(key);
+    int i = 0;
+    while (hash[(index + (i * (R - (key % R)))) % size] != key && hash[(index + (i * (R - (key % R)))) % size] !=0)
+        i++;
+    if (hash[(index + (i * (R - (key % R)))) % size]==0)
+        return -1;
+    return (index + (i * (R - (key % R)))) % size;
 }
 
 int main()
@@ -59,6 +71,12 @@ int main()
 
     for(int i=0;i<size;i++)
         cout<<hash[i]<<" ";
+    cout<<endl;
+    cout << Search(hash, 5) << " ";
+    cout << Search(hash, 25) << " ";
+    cout << Search(hash, 15) << " ";
+    cout << Search(hash, 35) << " ";
+    cout << Search(hash, 95) << " ";
     cout<<endl;
 
     return 0;
