@@ -1,51 +1,57 @@
-#include <iostream>
+#include<iostream>
 #define size 10
 using namespace std;
 
-int HashFunc(int key)
+int hashfn(int val)
 {
-    return key % size;
+    return val%size;
 }
 
-int Probe(int H[], int key)
+int Search(int hash[],int key)
 {
-    int index = HashFunc(key);
-    int i = 0;
-    while (H[(index + i*i) % size])
+    int index=hashfn(key);
+    int i=0;
+    while(hash[(index+i*i)%size]!=0 && hash[(index+i*i)%size]!=key)
         i++;
-    return (index + i*i) % size;
-}
-
-void Insert(int H[], int key)
-{
-    int index = HashFunc(key);
-    if (H[index])
-        index = Probe(H, key);
-    H[index] = key;
-}
-
-int Search(int H[], int key)
-{
-    int index = HashFunc(key);
-    int i = 0;
-    if (H[index] == 0)
+    if (hash[(index+i*i)%size]==0)
         return -1;
-    while (H[(index + i*i) % 10] != key && H[(index + i*i) % 10] != 0)
+    return (index+i*i)%size;
+}
+
+int Probe(int hash[],int key)
+{
+    int index=hashfn(key);
+    int i=0;
+    while(hash[(index+i*i)%size]!=0)
         i++;
-    if (H[(index + i*i) % 10] == 0)
-        return -1;
-    return (index + i*i) % 10;
+    return (index+i*i)%size;
+}
+
+void insert(int hash[],int key)
+{
+    int index=hashfn(key);
+    if(hash[index])
+        index=Probe(hash,key);
+    hash[index]=key;
 }
 
 int main()
 {
-    int Hash[size] = {0};
-    Insert(Hash, 12);
-    Insert(Hash, 25);
-    Insert(Hash, 35);
-    Insert(Hash, 26);
+    int hash[size]={0};
+    insert(hash, 23);
+    insert(hash, 43);
+    insert(hash, 13);
+    insert(hash, 27);
 
-    cout << Search(Hash, 35) << endl;
+    for(int i=0;i<size;i++)
+        cout<<hash[i]<<" ";
+    cout<<endl;
+
+    cout << Search(hash, 23) << " ";
+    cout << Search(hash, 43) << " ";
+    cout << Search(hash, 13) << " ";
+    cout << Search(hash, 27) << " ";
+    cout<<endl;
 
     return 0;
 }
