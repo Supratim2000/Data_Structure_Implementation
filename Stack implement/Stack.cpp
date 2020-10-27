@@ -51,7 +51,7 @@ class Stack
             if(isEmpyt())
             {
                 cout<<"Stack is Empty"<<endl;
-                return (T)'\0';
+                return 0;
             }
             T temp = data[nextIndex-1];
             nextIndex--;
@@ -64,7 +64,7 @@ class Stack
             if(isEmpyt())
             {
                 cout<<"Stack is empty"<<endl;
-                return (T) '\0';
+                return 0;
             }
             return data[nextIndex-1];
         }
