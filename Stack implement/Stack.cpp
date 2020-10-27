@@ -2,10 +2,11 @@
 #include<climits>
 using namespace std;
 
+template <typename T>
 class Stack
 {
     private:
-        int *data;
+        T *data;
         int nextIndex;
         int capacity;
 
@@ -13,7 +14,7 @@ class Stack
         Stack(int capacity)
         {
             this->capacity = capacity;
-            data = new int[capacity];
+            data = new T[capacity];
             nextIndex = 0;
         }
 
@@ -33,7 +34,7 @@ class Stack
         }
 
         //To insert element in Stack
-        void push(int element)
+        void push(T element)
         {
             if(isFull())
                 cout<<"Stack is full"<<endl;
@@ -45,25 +46,25 @@ class Stack
         }
 
         //To remove element in Stack 
-        int pop()
+        T pop()
         {
             if(isEmpyt())
             {
                 cout<<"Stack is Empty"<<endl;
-                return INT_MIN;
+                return (T)'\0';
             }
-            int temp = data[nextIndex-1];
+            T temp = data[nextIndex-1];
             nextIndex--;
             return temp;
         }
 
         //Reads the top most element in Stack
-        int top()
+        T top()
         {
             if(isEmpyt())
             {
                 cout<<"Stack is empty"<<endl;
-                return INT_MIN;
+                return (T) '\0';
             }
             return data[nextIndex-1];
         }
