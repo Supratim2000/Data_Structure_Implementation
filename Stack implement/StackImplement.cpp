@@ -1,27 +1,24 @@
 #include<iostream>
+#include<climits>
 #include "Stack.cpp"
 using namespace std;
 
 int main()
 {
-    Stack stk(4);
-
-    stk.push(10);
-    stk.push(20);
-    stk.push(30);
-    stk.push(40);
-    stk.push(50);
-
-    cout<<stk.top()<<endl;
+    Stack<char> stk(5);
+    stk.push('o');
+    stk.push('s');
+    stk.push('a');
+    stk.push('f');
+    stk.push('j');
+    stk.push('y');
+    cout << stk.top() << endl;
 
     cout << stk.pop() << endl;
     cout << stk.pop() << endl;
     cout << stk.pop() << endl;
 
-    cout<<stk.Size()<<endl;
-
-    cout<<boolalpha<<stk.isEmpyt()<<endl;
-    cout<<boolalpha<<stk.isFull()<<endl;
+    cout << stk.Size() << endl;
 
     return 0;
 }
